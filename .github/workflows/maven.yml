@@ -29,12 +29,7 @@ jobs:
           
       run: mvn test -X -Dbrowser=chrome -DisLambdaTest=true -DisHeadLess=false
 
-    -    name: Run Tests
-         run: |
-          # Check if the file exists
-          ls -al Test-Automation-Framework/testData/
-          
-          mvn test
+    
       
     - name: Upload Test logs 
       if: always()
