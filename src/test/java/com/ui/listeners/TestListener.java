@@ -32,14 +32,14 @@ public class TestListener implements ITestListener {
 
 	public void onTestSuccess(ITestResult result) {
 		logger.info(result.getMethod().getMethodName() + " " + "PASSED");
-		ExtentReporterUtility.getTest().log(Status.PASS, result.getMethod().getMethodName() + " " + "PASSED");
+		ExtentReporterUtility.getTest().log(Status.PASS,result.getMethod().getMethodName() + " " + "PASSED");
 		
 	}
 
 	public void onTestFailure(ITestResult result) {
 		logger.error(result.getMethod().getMethodName() + " " + "FAILED");
 		logger.error(result.getThrowable().getMessage());
-		ExtentReporterUtility.getTest().log(Status.FAIL, result.getMethod().getMethodName() + " " + "FAILED");
+		ExtentReporterUtility.getTest().log(Status.FAIL,result.getMethod().getMethodName() + " " + "FAILED");
 		ExtentReporterUtility.getTest().log(Status.FAIL,result.getThrowable().getMessage());
 	    
 		Object testclass=result.getInstance();
