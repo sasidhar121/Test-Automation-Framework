@@ -10,6 +10,7 @@ import org.testng.ITestResult;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.ui.tests.TestBase;
 import com.utility.BrowserUtility;
@@ -41,7 +42,7 @@ public class TestListener implements ITestListener {
 		ExtentReporterUtility.getTest().log(Status.FAIL, result.getMethod().getMethodName() + " " + "FAILED");
 		ExtentReporterUtility.getTest().log(Status.FAIL,result.getThrowable().getMessage());
 	    
-		Object testclass=result.getInstance();
+		Object testclass = result.getInstance();
 		
 		BrowserUtility browserUtility =((TestBase)testclass).getInstance();
 		logger.info("Capturing Screenshot for the failed tests");
