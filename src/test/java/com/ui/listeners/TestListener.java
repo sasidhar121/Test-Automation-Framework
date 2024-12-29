@@ -14,10 +14,11 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.ui.tests.TestBase;
 import com.utility.BrowserUtility;
 import com.utility.ExtentReporterUtility;
-import com.utility.LoggerUtility;
+import com.utility.LoggerUtlity;
+import com.utility.LoggerUtlity;
 
 public class TestListener implements ITestListener {
-	Logger logger = LoggerUtility.getLogger(this.getClass());
+	Logger logger = LoggerUtlity.getLogger(this.getClass());
 
 	ExtentSparkReporter extentSparkReporter;
 	ExtentReports extentReports;
