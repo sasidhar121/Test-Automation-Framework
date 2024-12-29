@@ -25,7 +25,7 @@ import com.constants.Browser;
 public  class BrowserUtility {
 
 	private static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
-	Logger logger = LoggerUtility.getLogger(this.getClass());
+	Logger logger = LoggerUtlity.getLogger(this.getClass());
 
 	public WebDriver getDriver() {
 		return driver.get();

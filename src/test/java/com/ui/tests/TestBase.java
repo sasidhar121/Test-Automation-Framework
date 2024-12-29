@@ -14,11 +14,11 @@ import com.constants.Browser;
 import com.ui.pages.HomePage;
 import com.utility.BrowserUtility;
 import com.utility.LambdaTestUtility;
-import com.utility.LoggerUtility;
+import com.utility.LoggerUtlity;
 
 public class TestBase {
 	protected HomePage homePage;
-	Logger logger = LoggerUtility.getLogger(this.getClass());
+	Logger logger = LoggerUtlity.getLogger(this.getClass());
 	private boolean isLambdaTest;
 
 	@Parameters({"browser","isLambdaTest","isHeadLess"})

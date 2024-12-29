@@ -11,14 +11,14 @@ import org.testng.annotations.Test;
 
 import com.ui.pages.HomePage;
 import com.ui.pojo.User;
-import com.utility.LoggerUtility;
+import com.utility.LoggerUtlity;
 
 @Listeners({com.ui.listeners.TestListener.class})
 
 public class LoginTest extends TestBase {
 
 	
-	Logger logger = LoggerUtility.getLogger(this.getClass());
+	Logger logger = LoggerUtlity.getLogger(this.getClass());
 
 
 @Test(description = "Verifies with the valid user is able to login into the application", groups = {"e2e" , "sanity"} , dataProviderClass = com.ui.dataproviders.LoginDataProvider.class,dataProvider = "LoginTestDataProvider")
