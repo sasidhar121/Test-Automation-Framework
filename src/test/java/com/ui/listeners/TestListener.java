@@ -1,70 +1,55 @@
 package com.ui.listeners;
 
-import java.util.Arrays;
-
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.ui.tests.TestBase;
-import com.utility.BrowserUtility;
 import com.utility.ExtentReporterUtility;
 import com.utility.LoggerUtility;
+
 public class TestListener implements ITestListener {
-	Logger logger = LoggerUtility.getLogger(this.getClass());
+    Logger logger = LoggerUtility.getLogger(this.getClass());
 
-	ExtentSparkReporter extentSparkReporter;
-	ExtentReports extentReports;
-	ExtentTest extentTest;
+    @Override
+    public void onTestStart(ITestResult result) {
+        logger.info("Starting test: " + result.getMethod().getMethodName());
+        // Create ExtentTest for the current thread
+        ExtentReporterUtility.createExtentTest(result.getMethod().getMethodName());
+    }
 
-	public void onTestStart(ITestResult result) {
-		logger.info(result.getMethod().getMethodName());
-		logger.info(result.getMethod().getDescription());
-		logger.info(Arrays.toString(result.getMethod().getGroups()));
-	    ExtentReporterUtility.createExtentTest(result.getMethod().getMethodName());
-	}
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        logger.info("Test passed: " + result.getMethod().getMethodName());
+        ExtentReporterUtility.getTest().log(Status.PASS, "Test passed: " + result.getMethod().getMethodName());
+    }
 
-	public void onTestSuccess(ITestResult result) {
-		logger.info(result.getMethod().getMethodName() + " " + "PASSED");
-		ExtentReporterUtility.getTest().log(Status.PASS, result.getMethod().getMethodName() + " " + "PASSED");
-		
-	}
+    @Override
+    public void onTestFailure(ITestResult result) {
+        logger.error("Test failed: " + result.getMethod().getMethodName());
+        logger.error("Error: " + result.getThrowable().getMessage());
+        ExtentReporterUtility.getTest().log(Status.FAIL, "Test failed: " + result.getMethod().getMethodName());
+        ExtentReporterUtility.getTest().log(Status.FAIL, result.getThrowable());
+    }
 
-	public void onTestFailure(ITestResult result) {
-		logger.error(result.getMethod().getMethodName() + " " + "FAILED");
-		logger.error(result.getThrowable().getMessage());
-		ExtentReporterUtility.getTest().log(Status.FAIL, result.getMethod().getMethodName() + " " + "FAILED");
-		ExtentReporterUtility.getTest().log(Status.FAIL,result.getThrowable().getMessage());
-	    
-		Object testclass=result.getInstance();
-		
-		BrowserUtility browserUtility =((TestBase)testclass).getInstance();
-		logger.info("Capturing Screenshot for the failed tests");
-		
-		String screenshotPath= browserUtility.takeScreenshot(result.getMethod().getMethodName());
-		logger.info("Attaching the Screenshot to the HTML File");
-		
-		ExtentReporterUtility.getTest().addScreenCaptureFromPath(screenshotPath);
-	}
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        logger.warn("Test skipped: " + result.getMethod().getMethodName());
+        ExtentReporterUtility.getTest().log(Status.SKIP, "Test skipped: " + result.getMethod().getMethodName());
+    }
 
-	public void onTestSkipped(ITestResult result) {
-		logger.warn(result.getMethod().getMethodName() + " " + "SKIPPED");
-		ExtentReporterUtility.getTest().log(Status.SKIP, result.getMethod().getMethodName() + " " + "SKIPPED");
-	}
+    @Override
+    public void onStart(ITestContext context) {
+        logger.info("Test Suite Started");
+        // Initialize the reporter
+        ExtentReporterUtility.setupSparkReporter("report.html");
+    }
 
-	public void onStart(ITestContext context) {
-		logger.info("Test Suite Started");
-		ExtentReporterUtility.setupSparkReporter("report.html");
-	}
-
-	public void onFinish(ITestContext context) {
-		logger.info("Test Suite Completed");
-		ExtentReporterUtility.flushReport();
-	}
-
+    @Override
+    public void onFinish(ITestContext context) {
+        logger.info("Test Suite Completed");
+        // Flush the report
+        ExtentReporterUtility.flushReport();
+    }
 }
