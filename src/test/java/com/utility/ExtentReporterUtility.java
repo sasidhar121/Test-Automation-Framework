@@ -27,11 +27,9 @@ public class ExtentReporterUtility {
 	}
 
 	public static void flushReport() {
-		if (extentReports != null) {
+		
             extentReports.flush();
-        } else {
-            System.out.println("ExtentReports is not initialized");
-        }
+        
 	}
 
 }
