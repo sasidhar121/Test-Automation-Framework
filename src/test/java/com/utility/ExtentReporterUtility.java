@@ -11,9 +11,7 @@ public class ExtentReporterUtility {
 	public static void setupSparkReporter(String reportName) {
 		ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(
 				System.getProperty("user.dir") + "//" + reportName);
-		ExtentReports extentReports= new ExtentReports();
-		
-
+		extentReports = new ExtentReports();
 		extentReports.attachReporter(extentSparkReporter);
 	}
 
@@ -27,9 +25,7 @@ public class ExtentReporterUtility {
 	}
 
 	public static void flushReport() {
-		
-            extentReports.flush();
-        
+		extentReports.flush();
 	}
 
 }
