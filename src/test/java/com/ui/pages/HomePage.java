@@ -8,11 +8,11 @@ import com.constants.Browser;
 import static com.constants.Env.*;
 import com.utility.BrowserUtility;
 import com.utility.JSONUtility;
-import com.utility.LoggerUtlity;
+import com.utility.LoggerUtility;
 
 import static com.utility.PropertiesUtil.*;
 public final class HomePage extends BrowserUtility{
-Logger logger = LoggerUtlity.getLogger(this.getClass());
+Logger logger = LoggerUtility.getLogger(this.getClass());
 
 
 

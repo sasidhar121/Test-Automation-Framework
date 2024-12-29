@@ -14,10 +14,9 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.ui.tests.TestBase;
 import com.utility.BrowserUtility;
 import com.utility.ExtentReporterUtility;
-import com.utility.LoggerUtlity;
-
+import com.utility.LoggerUtility;
 public class TestListener implements ITestListener {
-	Logger logger = LoggerUtlity.getLogger(this.getClass());
+	Logger logger = LoggerUtility.getLogger(this.getClass());
 
 	ExtentSparkReporter extentSparkReporter;
 	ExtentReports extentReports;
@@ -32,14 +31,14 @@ public class TestListener implements ITestListener {
 
 	public void onTestSuccess(ITestResult result) {
 		logger.info(result.getMethod().getMethodName() + " " + "PASSED");
-		ExtentReporterUtility.getTest().log(Status.PASS,result.getMethod().getMethodName() + " " + "PASSED");
+		ExtentReporterUtility.getTest().log(Status.PASS, result.getMethod().getMethodName() + " " + "PASSED");
 		
 	}
 
 	public void onTestFailure(ITestResult result) {
 		logger.error(result.getMethod().getMethodName() + " " + "FAILED");
 		logger.error(result.getThrowable().getMessage());
-		ExtentReporterUtility.getTest().log(Status.FAIL,result.getMethod().getMethodName() + " " + "FAILED");
+		ExtentReporterUtility.getTest().log(Status.FAIL, result.getMethod().getMethodName() + " " + "FAILED");
 		ExtentReporterUtility.getTest().log(Status.FAIL,result.getThrowable().getMessage());
 	    
 		Object testclass=result.getInstance();
