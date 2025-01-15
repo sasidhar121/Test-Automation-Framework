@@ -28,7 +28,7 @@ Logger logger = LoggerUtility.getLogger(this.getClass());
 		gotoWebSite(JSONUtility.readJSON(QA).getUrl());
 	}
     public LoginPage goToLoginPage() {//Page Functions ------> Cannot use void!!!!
-    	logger.info("Tring to performing click to go to Sign in Page");
+    	logger.info("Trying to performing click to go to Sign in Page");
     	clickOn(SIGN_IN_LINK_LOCATOR);
     	LoginPage loginPage = new LoginPage(getDriver());
     	return loginPage;
